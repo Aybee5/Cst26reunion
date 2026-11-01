@@ -1,0 +1,737 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>BUK 2021 Reunion</title>
+<meta name="description" content="Tuesday, 29 December 2026 at 10:30 AM. Confirm you're coming, support the reunion and see who else will be there.">
+<meta name="theme-color" content="#0B1D44">
+<meta property="og:type" content="website">
+<meta property="og:title" content="BUK Computer Science 2021 Reunion">
+<meta property="og:description" content="Tuesday, 29 December 2026 at 10:30 AM. Confirm you're coming, support the reunion and see who else will be there.">
+<meta property="og:url" content="https://aybee5.github.io/Cst26reunion/">
+<meta property="og:image" content="https://aybee5.github.io/Cst26reunion/flyer.jpg">
+<meta property="og:image:width" content="720">
+<meta property="og:image:height" content="1080">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230B1D44'/%3E%3Ctext x='32' y='42' font-family='Arial' font-weight='700' font-size='26' text-anchor='middle' fill='%23D99A22'%3E21%3C/text%3E%3C/svg%3E">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+</head>
+<body>
+<style id="site-css">
+/* Layout: navy hero band over the FCSIT building photo, then a single 960px column of sections; RSVP and contribution sit side by side on wide screens. */
+:root {
+  --bg: #F5F9FE;
+  --card: #FFFFFF;
+  --sky: #E6F0FB;
+  --ink: #0E2148;
+  --muted: #55688A;
+  --line: #D2E0F1;
+  --blue: #1568C4;
+  --blue-soft: #D7E8FA;
+  --gold: #D99A22;
+  --gold-soft: #FBEBC9;
+  --ok: #1F8A5B;
+  --ok-soft: #DDF3E8;
+  --warn-soft: #FFF1DA;
+  --hero: #0B1D44;
+  --on-hero: #FFFFFF;
+  --on-hero-muted: #BFD3F2;
+  --font-display: "Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+  --font-body: "Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --r: 14px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #08122A; --card: #0F1D3A; --sky: #0D1A35; --ink: #E7EEFA; --muted: #98AACB;
+    --line: #213558; --blue: #5EA8F5; --blue-soft: #15305A; --gold: #F0BB52; --gold-soft: #3A2C10;
+    --ok: #5CCB97; --ok-soft: #10301F; --warn-soft: #33270F; --hero: #061230; --on-hero: #FFFFFF; --on-hero-muted: #A9C1E8;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #08122A; --card: #0F1D3A; --sky: #0D1A35; --ink: #E7EEFA; --muted: #98AACB;
+  --line: #213558; --blue: #5EA8F5; --blue-soft: #15305A; --gold: #F0BB52; --gold-soft: #3A2C10;
+  --ok: #5CCB97; --ok-soft: #10301F; --warn-soft: #33270F; --hero: #061230; --on-hero: #FFFFFF; --on-hero-muted: #A9C1E8;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body { background: var(--bg); color: var(--ink); font-family: var(--font-body); font-size: 16px; line-height: 1.55; }
+h1, h2, h3 { font-family: var(--font-display); line-height: 1.1; margin: 0; text-wrap: balance; }
+p { margin: 0; }
+a { color: var(--blue); }
+button, input, select { font: inherit; color: inherit; }
+:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; border-radius: 6px; }
+
+.wrap { max-width: 960px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+
+/* Hero */
+.hero { background: var(--hero); color: var(--on-hero); position: relative; overflow: hidden; }
+.hero-photo { position: absolute; inset: 0; background-size: cover; background-position: center 40%; opacity: .32; }
+.hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(6,18,48,.35) 0%, rgba(6,18,48,.92) 78%); }
+.hero .wrap { position: relative; z-index: 1; padding-block: 44px 36px; display: grid; gap: 22px; }
+.eyebrow { font-size: 12.5px; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: var(--on-hero-muted); }
+.hero h1 { font-size: clamp(46px, 11vw, 92px); font-weight: 800; letter-spacing: -.02em; }
+.hero h1 .yr { color: var(--gold); display: block; font-size: .55em; letter-spacing: 0; }
+.hero-lede { max-width: 34em; color: var(--on-hero-muted); font-size: 17px; }
+.when { display: flex; flex-wrap: wrap; gap: 8px 18px; font-weight: 600; }
+.when span { display: inline-flex; align-items: center; gap: 8px; }
+.when svg { width: 18px; height: 18px; flex: none; color: var(--gold); }
+.countdown { display: flex; gap: 10px; flex-wrap: wrap; }
+.cd-cell { background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.16); border-radius: 12px; padding: 10px 14px; min-width: 78px; text-align: center; }
+.cd-num { font-family: var(--font-mono); font-size: 28px; font-weight: 700; font-variant-numeric: tabular-nums; display: block; line-height: 1.1; }
+.cd-lbl { font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; color: var(--on-hero-muted); }
+.cd-done { font-weight: 600; color: var(--gold); }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border-radius: 999px; padding: 12px 20px; font-weight: 700; border: 1.5px solid transparent; cursor: pointer; text-decoration: none; font-size: 15px; transition: transform .12s ease, background .12s ease; }
+.btn:active { transform: translateY(1px); }
+.btn-gold { background: var(--gold); color: #1A1204; }
+.btn-gold:hover { filter: brightness(1.06); }
+.btn-ghost-hero { background: transparent; color: var(--on-hero); border-color: rgba(255,255,255,.45); }
+.btn-ghost-hero:hover { background: rgba(255,255,255,.1); }
+.btn-blue { background: var(--blue); color: #fff; }
+:root[data-theme="dark"] .btn-blue { color: #06142E; }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .btn-blue { color: #06142E; } }
+.btn-blue:hover { filter: brightness(1.07); }
+.btn-wa { background: #1DA851; color: #fff; }
+.btn-line { background: var(--card); color: var(--ink); border-color: var(--line); }
+.btn-line:hover { border-color: var(--blue); }
+.btn-sm { padding: 8px 14px; font-size: 14px; }
+.btn[disabled] { opacity: .55; cursor: not-allowed; }
+
+/* Tally strip */
+.tally { margin-top: -1px; background: var(--card); border-bottom: 1px solid var(--line); }
+.tally .wrap { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); padding-block: 18px; gap: 12px; }
+.tally-item { display: grid; gap: 2px; min-width: 0; }
+.tally-num { font-family: var(--font-display); font-weight: 800; font-size: clamp(24px, 6vw, 34px); font-variant-numeric: tabular-nums; }
+.tally-lbl { font-size: 13px; color: var(--muted); }
+.goal { grid-column: 1 / -1; display: grid; gap: 6px; }
+.goal-bar { height: 10px; border-radius: 99px; background: var(--sky); overflow: hidden; border: 1px solid var(--line); }
+.goal-fill { height: 100%; background: linear-gradient(90deg, var(--blue), var(--gold)); border-radius: 99px; }
+.goal-text { font-size: 13px; color: var(--muted); }
+
+main { display: grid; gap: 56px; padding-block: 44px 64px; }
+.sec-head { display: grid; gap: 6px; margin-bottom: 18px; }
+.sec-head h2 { font-size: clamp(26px, 5vw, 34px); font-weight: 800; }
+.sec-head p { color: var(--muted); max-width: 40em; }
+.kicker { font-size: 12px; letter-spacing: .14em; text-transform: uppercase; font-weight: 700; color: var(--blue); }
+
+.two { display: grid; gap: 20px; grid-template-columns: 1fr; }
+@media (min-width: 780px) { .two { grid-template-columns: 1fr 1fr; } }
+.panel { background: var(--card); border: 1px solid var(--line); border-radius: var(--r); padding: 22px; display: grid; gap: 16px; align-content: start; min-width: 0; }
+.panel h3 { font-size: 22px; font-weight: 800; }
+.panel-sub { color: var(--muted); font-size: 14.5px; }
+
+form { display: grid; gap: 12px; }
+.field { display: grid; gap: 5px; min-width: 0; }
+.field label, .field .lbl { font-size: 13px; font-weight: 600; color: var(--muted); }
+.field input, .field select { width: 100%; padding: 11px 12px; border-radius: 10px; border: 1.5px solid var(--line); background: var(--bg); }
+.field input:focus, .field select:focus { border-color: var(--blue); outline: none; }
+.row2 { display: grid; gap: 12px; grid-template-columns: 1fr 1fr; }
+.seg { display: flex; gap: 8px; flex-wrap: wrap; }
+.seg label { flex: 1; min-width: 110px; }
+.seg input { position: absolute; opacity: 0; pointer-events: none; }
+.seg span { display: block; text-align: center; padding: 10px; border-radius: 10px; border: 1.5px solid var(--line); font-weight: 600; cursor: pointer; background: var(--bg); }
+.seg input:checked + span { border-color: var(--blue); background: var(--blue-soft); color: var(--ink); }
+.seg input:focus-visible + span { outline: 3px solid var(--gold); outline-offset: 2px; }
+.check { display: flex; gap: 8px; align-items: center; font-size: 14px; }
+
+.out { display: grid; gap: 10px; background: var(--sky); border: 1px dashed var(--line); border-radius: 12px; padding: 14px; }
+.out pre { margin: 0; white-space: pre-wrap; font-family: var(--font-mono); font-size: 13px; line-height: 1.5; }
+.out .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.note { font-size: 13px; color: var(--muted); }
+
+.pay { display: grid; gap: 4px; background: var(--sky); border-radius: 12px; padding: 16px; border: 1px solid var(--line); }
+.pay-bank { font-weight: 700; color: var(--blue); font-size: 14px; letter-spacing: .02em; }
+.acct { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.acct-num { font-family: var(--font-mono); font-weight: 700; font-size: clamp(24px, 6vw, 30px); letter-spacing: .04em; font-variant-numeric: tabular-nums; user-select: all; }
+.acct-name { font-weight: 600; }
+.steps { display: grid; gap: 10px; counter-reset: s; padding: 0; margin: 0; list-style: none; }
+.steps li { display: grid; grid-template-columns: 28px 1fr; gap: 10px; align-items: start; font-size: 15px; }
+.steps li::before { counter-increment: s; content: counter(s); width: 28px; height: 28px; border-radius: 50%; background: var(--gold-soft); color: var(--ink); font-weight: 800; display: grid; place-items: center; font-size: 14px; }
+
+/* Lists of people */
+.people { display: flex; flex-wrap: wrap; gap: 8px; }
+.person { display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px 6px 6px; border-radius: 999px; background: var(--card); border: 1px solid var(--line); max-width: 100%; min-width: 0; }
+.avatar { width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; font-weight: 800; font-size: 12.5px; flex: none; color: #fff; }
+.person-name { font-weight: 600; font-size: 14.5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.person-meta { font-size: 12.5px; color: var(--muted); white-space: nowrap; }
+.tag-maybe { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; background: var(--warn-soft); color: var(--ink); padding: 2px 7px; border-radius: 99px; }
+.x { border: 0; background: transparent; color: var(--muted); cursor: pointer; font-size: 18px; line-height: 1; padding: 0 2px; }
+.x:hover { color: #C0392B; }
+.group { display: grid; gap: 10px; }
+.group + .group { margin-top: 20px; }
+.group-h { font-size: 13px; font-weight: 700; color: var(--muted); letter-spacing: .06em; text-transform: uppercase; }
+.empty { border: 1.5px dashed var(--line); border-radius: var(--r); padding: 22px; color: var(--muted); display: grid; gap: 6px; }
+.empty strong { color: var(--ink); }
+
+.thanks { display: grid; gap: 0; background: var(--card); border: 1px solid var(--line); border-radius: var(--r); overflow: hidden; }
+.thanks-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 12px 16px; border-top: 1px solid var(--line); min-width: 0; }
+.thanks-row:first-child { border-top: 0; }
+.thanks-row .nm { font-weight: 600; min-width: 0; overflow-wrap: anywhere; }
+.thanks-row .amt { font-family: var(--font-mono); font-variant-numeric: tabular-nums; font-weight: 700; white-space: nowrap; }
+.thanks-row .amt.hidden-amt { color: var(--muted); font-family: var(--font-body); font-weight: 500; font-size: 13px; }
+
+.find { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
+.find-card { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px; display: flex; justify-content: space-between; align-items: center; gap: 10px; min-width: 0; }
+.find-card .nm { font-weight: 700; overflow-wrap: anywhere; }
+.find-card .dp { font-size: 13px; color: var(--muted); }
+
+.flyer-wrap { display: grid; gap: 20px; grid-template-columns: 1fr; align-items: center; }
+@media (min-width: 720px) { .flyer-wrap { grid-template-columns: 300px 1fr; } }
+.flyer-wrap img { width: 100%; max-width: 320px; border-radius: 12px; border: 1px solid var(--line); box-shadow: 0 12px 30px rgba(11,29,68,.18); justify-self: center; }
+.flyer-copy { display: grid; gap: 12px; min-width: 0; }
+
+footer { border-top: 1px solid var(--line); background: var(--card); }
+footer .wrap { padding-block: 26px 90px; display: grid; gap: 6px; color: var(--muted); font-size: 14px; }
+footer strong { color: var(--ink); font-family: var(--font-display); font-size: 18px; }
+
+/* Organiser */
+.org { border: 2px solid var(--gold); border-radius: var(--r); background: var(--card); padding: 22px; display: grid; gap: 18px; }
+.org-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+.org-tab { padding: 8px 14px; border-radius: 99px; border: 1.5px solid var(--line); background: var(--bg); font-weight: 600; cursor: pointer; font-size: 14px; }
+.org-tab[aria-selected="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.savebar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; background: var(--hero); color: var(--on-hero); padding-bottom: env(safe-area-inset-bottom, 0px); box-shadow: 0 -8px 24px rgba(0,0,0,.18); }
+.savebar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-block: 12px; flex-wrap: wrap; }
+.savebar-msg { font-weight: 600; font-size: 14.5px; }
+.savebar-actions { display: flex; gap: 8px; }
+
+.toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(80px + env(safe-area-inset-bottom, 0px)); background: var(--ink); color: var(--bg); padding: 10px 16px; border-radius: 10px; font-weight: 600; font-size: 14px; z-index: 30; max-width: calc(100% - 32px); }
+
+@media (max-width: 520px) {
+  .tally .wrap { grid-template-columns: repeat(3, minmax(0,1fr)); }
+  .row2 { grid-template-columns: 1fr; }
+  .countdown { gap: 8px; }
+  .cd-cell { min-width: 0; flex: 1 1 0; padding: 8px 6px; }
+  .cd-num { font-size: 22px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } html { scroll-behavior: auto; } }
+html { scroll-behavior: smooth; }
+</style>
+
+<div id="app">
+  <header class="hero">
+    <div class="hero-photo" style="background-image:url('building.jpg')" role="img" aria-label="The T.Y. Danjuma Building, Faculty of Computer Science and Information Technology, BUK"></div>
+    <div class="wrap">
+      <div class="eyebrow">Bayero University, Kano &middot; Computer Science</div>
+      <h1><span class="yr">2021</span>Reunion</h1>
+      <p class="hero-lede">Let&rsquo;s come together, reconnect with classmates, and honour the lecturers who shaped our journey. Confirm you&rsquo;re coming and support the planning with any amount you can.</p>
+      <div class="when">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg><span id="when-date">Tuesday, 29 December 2026</span></span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span id="when-time">10:30 AM WAT</span></span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><span id="when-venue">Venue to be announced</span></span>
+      </div>
+      <div class="countdown" id="countdown" role="timer" aria-label="Time until the reunion"></div>
+      <div class="hero-actions">
+        <a class="btn btn-gold" href="#rsvp">I&rsquo;m coming</a>
+        <a class="btn btn-ghost-hero" href="#contribute">Contribute</a>
+        <a class="btn btn-ghost-hero" id="cal-link" href="#" target="_blank" rel="noopener">Add to calendar</a>
+      </div>
+    </div>
+  </header>
+
+  <section class="tally" aria-label="Reunion so far">
+    <div class="wrap" id="tally"></div>
+  </section>
+
+  <main class="wrap">
+    <section id="organiser" hidden></section>
+    <section id="export" class="org" hidden aria-label="Updated data"></section>
+
+    <div class="two">
+      <section class="panel" id="rsvp" aria-labelledby="rsvp-h">
+        <div class="sec-head" style="margin:0">
+          <div class="kicker">Step one</div>
+          <h3 id="rsvp-h">Tell us you&rsquo;re coming</h3>
+          <p class="panel-sub">Fill this in and send it to the organisers on WhatsApp. Your name joins the list below once they confirm it.</p>
+        </div>
+        <form id="rsvp-form" novalidate>
+          <div class="field"><label for="r-name">Full name</label><input id="r-name" required autocomplete="name" placeholder="As your classmates know you"></div>
+          <div class="field"><label for="r-guests">Extra guests</label><select id="r-guests"><option value="0">Just me</option><option value="1">+1 guest</option></select></div>
+          <div class="field"><span class="lbl">Will you attend?</span>
+            <div class="seg" role="radiogroup">
+              <label><input type="radio" name="r-status" id="r-yes" value="yes" checked><span>Yes, I&rsquo;ll be there</span></label>
+              <label><input type="radio" name="r-status" id="r-maybe" value="maybe"><span>Maybe</span></label>
+            </div>
+          </div>
+          <button class="btn btn-blue" type="submit">Prepare my RSVP</button>
+        </form>
+        <div class="out" id="rsvp-out" hidden></div>
+      </section>
+
+      <section class="panel" id="contribute" aria-labelledby="pay-h">
+        <div class="sec-head" style="margin:0">
+          <div class="kicker">Step two</div>
+          <h3 id="pay-h">Support the reunion</h3>
+          <p class="panel-sub">No fixed amount. Everyone contributes according to their capacity, and every naira is recorded below.</p>
+        </div>
+        <div class="pay">
+          <div class="pay-bank">PALMPAY</div>
+          <div class="acct"><span class="acct-num" id="acct-num">813 934 9336</span><button class="btn btn-line btn-sm" type="button" id="copy-acct">Copy number</button></div>
+          <div class="acct-name">Ibrahim Abdullahi Aliyu</div>
+        </div>
+        <ol class="steps">
+          <li><span>Transfer any amount to the PalmPay account above.</span></li>
+          <li><span>Send your payment evidence so it can be recorded.</span></li>
+          <li><span>Your name appears on the contributors list once it&rsquo;s confirmed.</span></li>
+        </ol>
+        <form id="pay-form" novalidate>
+          <div class="row2">
+            <div class="field"><label for="p-name">Your name</label><input id="p-name" autocomplete="name"></div>
+            <div class="field"><label for="p-amt">Amount (&#8358;)</label><input id="p-amt" inputmode="numeric" placeholder="e.g. 10000"></div>
+          </div>
+          <label class="check"><input type="checkbox" id="p-show"> Show my amount on the list</label>
+          <button class="btn btn-blue" type="submit">Prepare payment evidence</button>
+        </form>
+        <div class="out" id="pay-out" hidden></div>
+      </section>
+    </div>
+
+    <section aria-labelledby="coming-h">
+      <div class="sec-head">
+        <div class="kicker">Who&rsquo;s coming</div>
+        <h2 id="coming-h">Confirmed classmates</h2>
+      </div>
+      <div id="coming"></div>
+    </section>
+
+    <section aria-labelledby="thanks-h">
+      <div class="sec-head">
+        <div class="kicker">Thank you</div>
+        <h2 id="thanks-h">Contributors</h2>
+        <p>Everyone who has supported the reunion so far. Amounts show only where the contributor agreed.</p>
+      </div>
+      <div id="thanks"></div>
+    </section>
+
+    <section aria-labelledby="find-h">
+      <div class="sec-head">
+        <div class="kicker">Help us find</div>
+        <h2 id="find-h">Classmates we haven&rsquo;t reached</h2>
+        <p>If you&rsquo;re still in touch with anyone here, let the organisers know or forward them this page.</p>
+      </div>
+      <div id="find"></div>
+    </section>
+
+    <section aria-labelledby="flyer-h">
+      <div class="flyer-wrap">
+        <img src="flyer.jpg" alt="2021 Reunion flyer for Bayero University, Kano" width="720" height="1080">
+        <div class="flyer-copy">
+          <div class="kicker">Spread the word</div>
+          <h2 id="flyer-h" style="font-size:clamp(26px,5vw,34px);font-weight:800">Share the flyer in your groups</h2>
+          <p style="color:var(--muted)">Long-press the flyer to save it, then post it on your WhatsApp status or in your department group with a link to this page. The more of us who show up, the better the day.</p>
+          <div><button class="btn btn-wa" type="button" id="share-wa">Share on WhatsApp</button></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <strong>BUK 2021 Reunion</strong>
+      <span>Computer Science, 2021 set &middot; Reconnect &middot; Celebrate &middot; Support &middot; Build</span>
+      <span id="foot-updated"></span>
+    </div>
+  </footer>
+
+  <div class="savebar" id="savebar" hidden>
+    <div class="wrap">
+      <span class="savebar-msg" id="savebar-msg"></span>
+      <span class="savebar-actions">
+        <a class="btn btn-ghost-hero btn-sm" id="gh-edit" href="https://github.com/Aybee5/Cst26reunion/edit/main/data.json" target="_blank" rel="noopener" hidden>Open data.json</a>
+        <button class="btn btn-ghost-hero btn-sm" type="button" id="discard">Discard</button>
+        <button class="btn btn-gold btn-sm" type="button" id="publish">Save &amp; publish</button>
+      </span>
+    </div>
+  </div>
+  <div class="toast" id="toast" hidden></div>
+
+</div>
+
+<script type="application/json" id="reunion-state">{"settings":{"eventLocal":"2026-12-29T10:30","durationHours":5,"venue":"","goal":0,"whatsapp":"+2348139349336"},"rsvps":[],"contributions":[],"missing":[],"updatedAt":""}</script>
+
+<script id="app-js">
+(function () {
+  "use strict";
+  var MODE = "pages";
+  var REPO_EDIT_URL = "https://github.com/Aybee5/Cst26reunion/edit/main/data.json";
+  var appEl = document.getElementById("app");
+  var STATIC_HTML = appEl.outerHTML;
+  var CSS = document.getElementById("site-css").textContent;
+  var JS = document.getElementById("app-js").textContent;
+  var RESET = "";
+  try { var hs = document.head && document.head.querySelector("style"); if (hs) RESET = hs.textContent; } catch (e) {}
+  if (!RESET) RESET = ":root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px system-ui,sans-serif}img{max-width:100%}[hidden]{display:none!important}";
+  var HEAD_EXTRA = '<title>BUK 2021 Reunion<\/title>\n<meta name="claude:viewport-fit-sides" content="cover">\n<link rel="preconnect" href="https://fonts.googleapis.com">\n<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>\n<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap">\n';
+
+  var saved = JSON.parse(document.getElementById("reunion-state").textContent);
+  var state = clone(saved);
+  var isOrganiser = false;
+  var artApi = null;
+
+  function clone(o) { return JSON.parse(JSON.stringify(o)); }
+  function $(id) { return document.getElementById(id); }
+  function el(tag, attrs) {
+    var n = document.createElement(tag);
+    if (attrs) for (var k in attrs) {
+      if (k === "text") n.textContent = attrs[k];
+      else if (k === "class") n.className = attrs[k];
+      else if (k.slice(0, 2) === "on") n.addEventListener(k.slice(2), attrs[k]);
+      else n.setAttribute(k, attrs[k]);
+    }
+    for (var i = 2; i < arguments.length; i++) { var c = arguments[i]; if (c == null) continue; n.appendChild(typeof c === "string" ? document.createTextNode(c) : c); }
+    return n;
+  }
+  function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
+  function naira(n) { return "₦" + Number(n || 0).toLocaleString("en-NG"); }
+  function eventDate(s) { return new Date((s || state.settings).eventLocal + ":00+01:00"); }
+  function initials(name) { var p = String(name).trim().split(/\s+/); return ((p[0] || "")[0] || "").toUpperCase() + ((p.length > 1 ? p[p.length - 1][0] : "") || "").toUpperCase(); }
+  var PALETTE = ["#1568C4", "#0E7C86", "#B26B00", "#7A4CC2", "#C2416B", "#2E7D32", "#3D5A99", "#9A5B2E"];
+  function colorFor(name) { var h = 0; for (var i = 0; i < name.length; i++) h = (h * 31 + name.charCodeAt(i)) >>> 0; return PALETTE[h % PALETTE.length]; }
+  function digits(s) { var d = String(s || "").replace(/\D/g, ""); if (d.charAt(0) === "0") d = "234" + d.slice(1); return d; }
+  function waLink(text) { var n = digits(state.settings.whatsapp); return "https://wa.me/" + (n ? n : "") + "?text=" + encodeURIComponent(text); }
+  function dateLabel() {
+    try { return eventDate().toLocaleDateString("en-GB", { weekday: "long", day: "numeric", month: "long", year: "numeric", timeZone: "Africa/Lagos" }); } catch (e) { return state.settings.eventLocal; }
+  }
+  function shortDate() {
+    try { return eventDate().toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short", year: "numeric", timeZone: "Africa/Lagos" }); } catch (e) { return state.settings.eventLocal; }
+  }
+  function timeLabel() {
+    try { return eventDate().toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit", timeZone: "Africa/Lagos" }) + " WAT"; } catch (e) { return ""; }
+  }
+  function toast(msg) { var t = $("toast"); t.textContent = msg; t.hidden = false; clearTimeout(toast._t); toast._t = setTimeout(function () { t.hidden = true; }, 2600); }
+  function copyText(text, fallbackEl) {
+    var done = function () { toast("Copied"); };
+    var fail = function () {
+      if (fallbackEl) { var r = document.createRange(); r.selectNodeContents(fallbackEl); var s = window.getSelection(); s.removeAllRanges(); s.addRange(r); toast("Selected. Copy it from your keyboard menu."); }
+      else toast("Couldn't copy. Select the text and copy it manually.");
+    };
+    try { navigator.clipboard.writeText(text).then(done, fail); } catch (e) { fail(); }
+  }
+
+  /* ---------- Rendering ---------- */
+  function renderHero() {
+    $("when-date").textContent = dateLabel();
+    $("when-time").textContent = timeLabel();
+    $("when-venue").textContent = state.settings.venue || "Venue to be announced";
+    var start = eventDate();
+    var end = new Date(start.getTime() + (state.settings.durationHours || 5) * 3600000);
+    var f = function (d) { return d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, ""); };
+    $("cal-link").href = "https://calendar.google.com/calendar/render?action=TEMPLATE&text=" + encodeURIComponent("BUK 2021 Reunion") +
+      "&dates=" + f(start) + "/" + f(end) +
+      "&details=" + encodeURIComponent("Bayero University, Kano, Computer Science 2021 set reunion.") +
+      "&location=" + encodeURIComponent(state.settings.venue || "Bayero University, Kano");
+  }
+
+  var cdCells = null;
+  function renderCountdown() {
+    var box = $("countdown");
+    var diff = eventDate().getTime() - Date.now();
+    if (isNaN(diff)) return;
+    if (diff <= 0) {
+      cdCells = null; box.textContent = "";
+      box.appendChild(el("p", { class: "cd-done", text: diff > -12 * 3600000 ? "The reunion is happening today." : "The reunion has taken place. Thank you to everyone who came." }));
+      return;
+    }
+    var t = Math.floor(diff / 1000);
+    var vals = [Math.floor(t / 86400), Math.floor(t / 3600) % 24, Math.floor(t / 60) % 60, t % 60];
+    var lbls = [vals[0] === 1 ? "day" : "days", "hours", "mins", "secs"];
+    if (!cdCells) {
+      box.textContent = "";
+      cdCells = vals.map(function () {
+        var n = el("span", { class: "cd-num" }), l = el("span", { class: "cd-lbl" });
+        box.appendChild(el("div", { class: "cd-cell" }, n, l));
+        return [n, l];
+      });
+    }
+    cdCells.forEach(function (c, i) {
+      var v = String(vals[i]).padStart(2, "0");
+      if (c[0].textContent !== v) c[0].textContent = v;
+      if (c[1].textContent !== lbls[i]) c[1].textContent = lbls[i];
+    });
+  }
+
+  function renderTally() {
+    var box = $("tally"); box.textContent = "";
+    var yes = state.rsvps.filter(function (r) { return r.status === "yes"; });
+    var heads = yes.reduce(function (a, r) { return a + 1 + (Number(r.guests) || 0); }, 0);
+    var maybe = state.rsvps.length - yes.length;
+    var total = state.contributions.reduce(function (a, c) { return a + (Number(c.amount) || 0); }, 0);
+    function item(num, lbl) { return el("div", { class: "tally-item" }, el("span", { class: "tally-num", text: num }), el("span", { class: "tally-lbl", text: lbl })); }
+    box.appendChild(item(String(yes.length), "confirmed" + (maybe ? " · " + maybe + " maybe" : "") + (heads > yes.length ? " · " + heads + " incl. guests" : "")));
+    box.appendChild(item(String(state.contributions.length), state.contributions.length === 1 ? "contributor" : "contributors"));
+    box.appendChild(item(naira(total), "raised so far"));
+    var goal = Number(state.settings.goal) || 0;
+    if (goal > 0) {
+      var pct = Math.min(100, Math.round(total / goal * 100));
+      box.appendChild(el("div", { class: "goal" },
+        el("div", { class: "goal-bar", role: "progressbar", "aria-valuemin": "0", "aria-valuemax": "100", "aria-valuenow": String(pct) }, el("div", { class: "goal-fill", style: "width:" + pct + "%" })),
+        el("span", { class: "goal-text", text: pct + "% of the " + naira(goal) + " planning budget" })));
+    }
+  }
+
+  function removeBtn(list, id, label) {
+    if (!isOrganiser) return null;
+    return el("button", { class: "x", type: "button", "aria-label": "Remove " + label, title: "Remove", onclick: function () {
+      state[list] = state[list].filter(function (x) { return x.id !== id; }); changed();
+    } }, "×");
+  }
+
+  function renderComing() {
+    var box = $("coming"); box.textContent = "";
+    if (!state.rsvps.length) {
+      box.appendChild(el("div", { class: "empty" }, el("strong", { text: "No confirmations yet." }), el("span", { text: "Be the first. Fill in the RSVP above and send it to the organisers; names appear here as they're confirmed." })));
+      return;
+    }
+    var row = el("div", { class: "people" });
+    state.rsvps.slice().sort(function (a, b) { return a.name.localeCompare(b.name); }).forEach(function (r) {
+      row.appendChild(el("span", { class: "person" },
+        el("span", { class: "avatar", style: "background:" + colorFor(r.name), text: initials(r.name) || "?" }),
+        el("span", { class: "person-name", text: r.name }),
+        Number(r.guests) ? el("span", { class: "person-meta", text: "+" + r.guests }) : null,
+        r.status === "maybe" ? el("span", { class: "tag-maybe", text: "Maybe" }) : null,
+        removeBtn("rsvps", r.id, r.name)));
+    });
+    box.appendChild(row);
+  }
+
+  function renderThanks() {
+    var box = $("thanks"); box.textContent = "";
+    if (!state.contributions.length) {
+      box.appendChild(el("div", { class: "empty" }, el("strong", { text: "No contributions recorded yet." }), el("span", { text: "Once payment evidence is confirmed, contributors are listed here." })));
+      return;
+    }
+    var list = el("div", { class: "thanks" });
+    state.contributions.slice().sort(function (a, b) { return (b.date || "").localeCompare(a.date || ""); }).forEach(function (c) {
+      var shown = c.showAmount || isOrganiser;
+      list.appendChild(el("div", { class: "thanks-row" },
+        el("span", { class: "nm", text: c.anonymous ? "A classmate" + (isOrganiser ? " (" + c.name + ")" : "") : c.name }),
+        el("span", { style: "display:flex;align-items:center;gap:8px" },
+          el("span", { class: "amt" + (shown ? "" : " hidden-amt"), text: shown ? naira(c.amount) + (isOrganiser && !c.showAmount ? " (private)" : "") : "Thank you" }),
+          removeBtn("contributions", c.id, c.name))));
+    });
+    box.appendChild(list);
+  }
+
+  function renderFind() {
+    var box = $("find"); box.textContent = "";
+    if (!state.missing.length) {
+      box.appendChild(el("div", { class: "empty" }, el("strong", { text: "Nobody on this list yet." }), el("span", { text: "The organisers will add names of classmates nobody has been able to reach." })));
+      return;
+    }
+    var grid = el("div", { class: "find" });
+    state.missing.forEach(function (m) {
+      grid.appendChild(el("div", { class: "find-card" },
+        el("div", { class: "nm", style: "min-width:0", text: m.name }),
+        el("span", { style: "display:flex;align-items:center;gap:6px" },
+          el("a", { class: "btn btn-line btn-sm", href: waLink("Salam! I'm in touch with " + m.name + " and can help reach them for the BUK 2021 reunion. My name: "), target: "_blank", rel: "noopener" }, "I know them"),
+          removeBtn("missing", m.id, m.name))));
+    });
+    box.appendChild(grid);
+  }
+
+  function renderFooter() {
+    $("foot-updated").textContent = state.updatedAt ? "Last updated " + new Date(state.updatedAt).toLocaleString("en-GB", { day: "numeric", month: "short", hour: "numeric", minute: "2-digit", timeZone: "Africa/Lagos" }) + " WAT" : "";
+  }
+
+  function render() {
+    renderHero(); renderCountdown(); renderTally(); renderComing(); renderThanks(); renderFind(); renderFooter();
+    if (isOrganiser) renderOrganiser();
+    renderSavebar();
+  }
+
+  /* ---------- Visitor forms ---------- */
+  function showOut(box, msg) {
+    box.textContent = "";
+    var pre = el("pre", { text: msg });
+    box.appendChild(pre);
+    box.appendChild(el("div", { class: "actions" },
+      el("a", { class: "btn btn-wa btn-sm", href: waLink(msg), target: "_blank", rel: "noopener" }, "Send on WhatsApp"),
+      el("button", { class: "btn btn-line btn-sm", type: "button", onclick: function () { copyText(msg, pre); } }, "Copy message")));
+    box.appendChild(el("p", { class: "note", text: state.settings.whatsapp ? "This opens a chat with the organiser with the message filled in." : "WhatsApp will ask which chat to send it to. Pick the reunion organiser or the class group." }));
+    box.hidden = false;
+  }
+
+  $("rsvp-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var name = $("r-name").value.trim();
+    if (!name) { $("r-name").focus(); toast("Add your name first"); return; }
+    var status = $("r-maybe").checked ? "Maybe" : "Yes";
+    var guests = Math.min(1, Number($("r-guests").value) || 0);
+    var msg = "Salam! RSVP for the BUK Computer Science 2021 Reunion (" + shortDate() + ")\n" +
+      "Name: " + name + "\n" + "Attending: " + status + "\n" + "Extra guests: " + guests;
+    showOut($("rsvp-out"), msg);
+    if (isOrganiser) {
+      state.rsvps.push({ id: uid(), name: name, status: status.toLowerCase(), guests: guests }); changed();
+      toast("Added to the list (organiser)");
+    }
+  });
+
+  $("pay-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+    var name = $("p-name").value.trim();
+    var amt = Number(String($("p-amt").value).replace(/[^\d.]/g, "")) || 0;
+    if (!name) { $("p-name").focus(); toast("Add your name first"); return; }
+    if (!amt) { $("p-amt").focus(); toast("Add the amount you sent"); return; }
+    var msg = "Contribution for the BUK 2021 Reunion\n" + "Name: " + name + "\n" + "Amount: " + naira(amt) + "\n" +
+      "Show amount publicly: " + ($("p-show").checked ? "Yes" : "No") + "\n" + "(PalmPay receipt attached)";
+    showOut($("pay-out"), msg);
+  });
+
+  $("copy-acct").addEventListener("click", function () { copyText("8139349336", $("acct-num")); });
+  $("share-wa").addEventListener("click", function () {
+    var text = "BUK 2021 Reunion: " + dateLabel() + ", " + timeLabel() + ". Confirm you're coming and see who else will be there.";
+    window.open("https://wa.me/?text=" + encodeURIComponent(text), "_blank", "noopener");
+  });
+
+  /* ---------- Organiser ---------- */
+  var orgTab = "rsvp";
+  function dirty() { return JSON.stringify(state) !== JSON.stringify(saved); }
+  function changed() { render(); }
+
+  function renderSavebar() {
+    var bar = $("savebar");
+    if (!isOrganiser) { bar.hidden = true; return; }
+    bar.hidden = false;
+    var d = dirty();
+    if (MODE === "pages") $("savebar-msg").textContent = d ? "Unsaved changes. Copy the data and commit it as data.json to update the site." : "Organiser mode. No changes yet.";
+    else $("savebar-msg").textContent = d ? "Unsaved changes. Visitors see them after you publish." : "Organiser mode. Everything is published.";
+    $("publish").disabled = !d; $("discard").disabled = !d;
+  }
+
+  function field(id, label, input) { input.id = id; return el("div", { class: "field" }, el("label", { for: id, text: label }), input); }
+
+  function renderOrganiser() {
+    var box = $("organiser"); box.hidden = false; box.textContent = "";
+    var tabs = [["rsvp", "Add attendee"], ["pay", "Record contribution"], ["find", "Add missing classmate"], ["settings", "Event settings"]];
+    var tabRow = el("div", { class: "org-tabs", role: "tablist" });
+    tabs.forEach(function (t) {
+      tabRow.appendChild(el("button", { class: "org-tab", type: "button", role: "tab", "aria-selected": String(orgTab === t[0]), onclick: function () { orgTab = t[0]; renderOrganiser(); } }, t[1]));
+    });
+    var body;
+    if (orgTab === "rsvp") {
+      var n = el("input"), g = el("select"), s = el("select");
+      ["0", "1"].forEach(function (v) { g.appendChild(el("option", { value: v, text: v === "0" ? "None" : "+" + v })); });
+      [["yes", "Coming"], ["maybe", "Maybe"]].forEach(function (v) { s.appendChild(el("option", { value: v[0], text: v[1] })); });
+      body = el("form", { onsubmit: function (e) { e.preventDefault(); if (!n.value.trim()) { n.focus(); return; }
+        state.rsvps.push({ id: uid(), name: n.value.trim(), status: s.value, guests: Number(g.value) || 0 }); n.value = ""; changed(); toast("Attendee added"); } },
+        field("o-r-name", "Name", n),
+        el("div", { class: "row2" }, field("o-r-status", "Status", s), field("o-r-guests", "Extra guests", g)),
+        el("div", {}, el("button", { class: "btn btn-blue btn-sm", type: "submit" }, "Add to list")));
+    } else if (orgTab === "pay") {
+      var pn = el("input"), pa = el("input", { inputmode: "numeric" }), pd = el("input", { type: "date" }), ps = el("input", { type: "checkbox" }), pan = el("input", { type: "checkbox" });
+      try { pd.value = new Date().toLocaleDateString("en-CA", { timeZone: "Africa/Lagos" }); } catch (e) {}
+      ps.id = "o-p-show"; pan.id = "o-p-anon";
+      body = el("form", { onsubmit: function (e) { e.preventDefault(); var amt = Number(String(pa.value).replace(/[^\d.]/g, "")) || 0; if (!pn.value.trim()) { pn.focus(); return; } if (!amt) { pa.focus(); return; }
+        state.contributions.push({ id: uid(), name: pn.value.trim(), amount: amt, date: pd.value, showAmount: ps.checked, anonymous: pan.checked }); pn.value = ""; pa.value = ""; ps.checked = false; pan.checked = false; changed(); toast("Contribution recorded"); } },
+        el("div", { class: "row2" }, field("o-p-name", "Contributor name", pn), field("o-p-amt", "Amount (₦)", pa)),
+        field("o-p-date", "Date received", pd),
+        el("label", { class: "check" }, ps, "Show amount publicly"),
+        el("label", { class: "check" }, pan, "List as “A classmate” (hide name)"),
+        el("div", {}, el("button", { class: "btn btn-blue btn-sm", type: "submit" }, "Record contribution")));
+    } else if (orgTab === "find") {
+      var mn = el("input");
+      body = el("form", { onsubmit: function (e) { e.preventDefault(); if (!mn.value.trim()) { mn.focus(); return; }
+        state.missing.push({ id: uid(), name: mn.value.trim() }); mn.value = ""; changed(); toast("Added to the search list"); } },
+        field("o-m-name", "Name", mn),
+        el("div", {}, el("button", { class: "btn btn-blue btn-sm", type: "submit" }, "Add")));
+    } else {
+      var dt = el("input", { type: "datetime-local", value: state.settings.eventLocal });
+      var vn = el("input", { value: state.settings.venue || "", placeholder: "e.g. FCSIT, T.Y. Danjuma Building, New Campus" });
+      var gl = el("input", { inputmode: "numeric", value: state.settings.goal ? String(state.settings.goal) : "", placeholder: "Leave empty for no target" });
+      var wa = el("input", { inputmode: "tel", value: state.settings.whatsapp || "", placeholder: "e.g. 0803 000 0000" });
+      body = el("form", { onsubmit: function (e) { e.preventDefault();
+        state.settings.eventLocal = dt.value || state.settings.eventLocal;
+        state.settings.venue = vn.value.trim();
+        state.settings.goal = Number(String(gl.value).replace(/[^\d]/g, "")) || 0;
+        state.settings.whatsapp = wa.value.trim();
+        changed(); toast("Settings updated"); } },
+        el("div", { class: "row2" }, field("o-s-date", "Date and time (WAT)", dt), field("o-s-venue", "Venue", vn)),
+        el("div", { class: "row2" }, field("o-s-goal", "Planning budget (₦)", gl), field("o-s-wa", "Organiser WhatsApp number", wa)),
+        el("p", { class: "note", text: "The weekday shown on the page is worked out from the date, so it always matches the calendar." }),
+        el("div", {}, el("button", { class: "btn btn-blue btn-sm", type: "submit" }, "Apply settings")));
+    }
+    box.appendChild(el("div", { class: "org" },
+      el("div", { class: "sec-head", style: "margin:0" }, el("div", { class: "kicker", text: MODE === "pages" ? "Organiser mode" : "Only you can see this" }), el("h3", { style: "font-size:22px", text: "Organiser tools" }),
+        el("p", { class: "panel-sub", text: MODE === "pages"
+          ? "Record RSVPs and confirmed payments you receive on WhatsApp, then tap Copy data.json and paste it over data.json in the GitHub repo. Use × on any entry to remove it. Anyone with the organiser link can open this panel, but only a commit to the repo changes the site."
+          : "Record RSVPs and confirmed payments you receive on WhatsApp. Use × on any entry to remove it. Nothing changes for visitors until you press Save & publish." })),
+      tabRow, body));
+  }
+
+  function buildDoc(st) {
+    st.updatedAt = new Date().toISOString();
+    var json = JSON.stringify(st).replace(/</g, "\\u003c");
+    return "<!doctype html><html><head><meta charset=utf8><meta name=viewport content=\"width=device-width,initial-scale=1,viewport-fit=cover\"><style>" + RESET + "<\/style><\/head><body>" +
+      HEAD_EXTRA + "<style id=\"site-css\">" + CSS + "<\/style>\n" + STATIC_HTML +
+      "\n<script type=\"application/json\" id=\"reunion-state\">" + json + "<\/script>\n<script id=\"app-js\">" + JS + "<\/script><\/body><\/html>";
+  }
+
+  $("discard").addEventListener("click", function () { state = clone(saved); render(); toast("Changes discarded"); });
+  function exportData() {
+    var st = clone(state); st.updatedAt = new Date().toISOString();
+    var json = JSON.stringify(st, null, 2) + "\n";
+    var box = $("export"); box.textContent = "";
+    var ta = el("textarea", { id: "export-json", readonly: "readonly", rows: "10", style: "width:100%;font-family:var(--font-mono);font-size:12.5px;padding:10px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink)" });
+    ta.value = json;
+    box.appendChild(el("div", { class: "sec-head", style: "margin:0" }, el("div", { class: "kicker", text: "Last step" }), el("h3", { style: "font-size:22px", text: "Commit data.json" }),
+      el("p", { class: "panel-sub", text: "Open data.json on GitHub, select all, paste this in its place and commit. The site updates within a few minutes." })));
+    box.appendChild(ta);
+    box.appendChild(el("div", { style: "display:flex;gap:8px;flex-wrap:wrap" },
+      el("button", { class: "btn btn-blue btn-sm", type: "button", onclick: function () { ta.select(); copyText(json, null); } }, "Copy again"),
+      el("a", { class: "btn btn-line btn-sm", href: REPO_EDIT_URL, target: "_blank", rel: "noopener" }, "Open data.json on GitHub")));
+    box.hidden = false;
+    try { navigator.clipboard.writeText(json).then(function () { toast("Copied data.json"); }, function () { ta.select(); toast("Select the text and copy it"); }); } catch (e) { ta.select(); }
+    box.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
+  $("publish").addEventListener("click", function () {
+    if (MODE === "pages") { exportData(); return; }
+    if (!artApi) { toast("Saving isn't available in this view."); return; }
+    var btn = $("publish"); btn.disabled = true; $("savebar-msg").textContent = "Publishing…";
+    artApi.publish(buildDoc(clone(state))).then(function () {
+      $("savebar-msg").textContent = "Published. Reloading the latest version…";
+    }, function (err) {
+      var code = err && err.code;
+      if (code === "conflict") $("savebar-msg").textContent = "Someone saved a newer version first. Reloading it now; re-enter your last changes after.";
+      else if (code === "not_writer" || code === "not_granted" || code === "consent_required" || code === "capability_disabled") { isOrganiser = false; $("organiser").hidden = true; render(); toast("This view is read-only, so changes can't be saved here."); }
+      else if (code === "rate_limited") { btn.disabled = false; $("savebar-msg").textContent = "Saving too often. Wait a moment, then publish again."; }
+      else { btn.disabled = false; $("savebar-msg").textContent = "Couldn't publish (" + (code || "error") + "). Try again in a moment."; }
+    });
+  });
+
+  /* ---------- Boot ---------- */
+  render();
+  setInterval(renderCountdown, 1000);
+
+  if (MODE === "pages") {
+    $("publish").textContent = "Copy data.json";
+    $("gh-edit").hidden = false;
+    var checkHash = function () { var on = location.hash === "#organiser"; if (on !== isOrganiser) { isOrganiser = on; if (!on) { $("organiser").hidden = true; $("export").hidden = true; } render(); } };
+    window.addEventListener("hashchange", checkHash);
+    checkHash();
+    fetch("data.json?t=" + Date.now(), { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
+      if (d && d.settings) { saved = d; state = clone(d); render(); }
+    }).catch(function () {});
+  }
+
+  var C = window.claude;
+  if (MODE === "artifact" && C && typeof C.use === "function") {
+    Promise.all([C.use("user").catch(function () { return null; }), C.use("artifact").catch(function () { return null; })]).then(function (r) {
+      var user = r[0]; artApi = r[1];
+      if (!user || !artApi) return null;
+      return user.canEdit();
+    }).then(function (can) {
+      if (can) { isOrganiser = true; render(); }
+    }).catch(function () {});
+  }
+})();
+</script>
+
+</body>
+</html>
