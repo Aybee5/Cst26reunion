@@ -140,6 +140,15 @@ form { display: grid; gap: 12px; }
 .seg input:checked + span { border-color: var(--blue); background: var(--blue-soft); color: var(--ink); }
 .seg input:focus-visible + span { outline: 3px solid var(--gold); outline-offset: 2px; }
 .check { display: flex; gap: 8px; align-items: center; font-size: 14px; }
+.check input { width: 18px; height: 18px; accent-color: var(--blue); flex: none; }
+.hide-opt { display: grid; gap: 4px; padding: 12px 14px; border-radius: 10px; background: var(--bg); border: 1.5px solid var(--line); }
+.hide-opt .check { font-weight: 600; font-size: 15px; }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.ok-box { background: var(--ok-soft); border: 1px solid var(--line); border-radius: 12px; padding: 14px; display: grid; gap: 8px; }
+.ok-box strong { color: var(--ok); font-size: 16px; }
+.err-box { background: var(--warn-soft); border-radius: 12px; padding: 12px 14px; font-size: 14px; }
+.person.is-new { border-color: var(--ok); box-shadow: 0 0 0 3px var(--ok-soft); }
+.private-note { margin-top: 12px; font-size: 14px; color: var(--muted); }
 
 .out { display: grid; gap: 10px; background: var(--sky); border: 1px dashed var(--line); border-radius: 12px; padding: 14px; }
 .out pre { margin: 0; white-space: pre-wrap; font-family: var(--font-mono); font-size: 13px; line-height: 1.5; }
@@ -248,18 +257,26 @@ html { scroll-behavior: smooth; }
         <div class="sec-head" style="margin:0">
           <div class="kicker">Step one</div>
           <h3 id="rsvp-h">Tell us you&rsquo;re coming</h3>
-          <p class="panel-sub">Fill this in and send it to the organisers on WhatsApp. Your name joins the list below once they confirm it.</p>
+          <p class="panel-sub" id="rsvp-sub">Fill this in and send it to the organisers on WhatsApp. Your name joins the list below once they confirm it.</p>
         </div>
         <form id="rsvp-form" novalidate>
-          <div class="field"><label for="r-name">Full name</label><input id="r-name" required autocomplete="name" placeholder="As your classmates know you"></div>
-          <div class="field"><label for="r-guests">Extra guests</label><select id="r-guests"><option value="0">Just me</option><option value="1">+1 guest</option></select></div>
+          <div class="field"><label for="r-name">Full name</label><input id="r-name" required autocomplete="name" maxlength="60" placeholder="As your classmates know you"></div>
+          <div class="row2">
+            <div class="field" id="r-phone-field" hidden><label for="r-phone">WhatsApp number</label><input id="r-phone" inputmode="tel" autocomplete="tel" maxlength="20" placeholder="0803 000 0000"></div>
+            <div class="field"><label for="r-guests">Extra guests</label><select id="r-guests"><option value="0">Just me</option><option value="1">+1 guest</option></select></div>
+          </div>
           <div class="field"><span class="lbl">Will you attend?</span>
             <div class="seg" role="radiogroup">
               <label><input type="radio" name="r-status" id="r-yes" value="yes" checked><span>Yes, I&rsquo;ll be there</span></label>
               <label><input type="radio" name="r-status" id="r-maybe" value="maybe"><span>Maybe</span></label>
             </div>
           </div>
-          <button class="btn btn-blue" type="submit">Prepare my RSVP</button>
+          <div class="hide-opt">
+            <label class="check" for="r-hide"><input type="checkbox" id="r-hide"> Hide my RSVP</label>
+            <span class="note">You still count in the total, but your name won&rsquo;t appear on the public list.</span>
+          </div>
+          <div class="hp" aria-hidden="true"><label for="r-website">Leave this empty</label><input id="r-website" tabindex="-1" autocomplete="off"></div>
+          <button class="btn btn-blue" type="submit" id="r-submit">Prepare my RSVP</button>
         </form>
         <div class="out" id="rsvp-out" hidden></div>
       </section>
@@ -296,6 +313,7 @@ html { scroll-behavior: smooth; }
       <div class="sec-head">
         <div class="kicker">Who&rsquo;s coming</div>
         <h2 id="coming-h">Confirmed classmates</h2>
+        <p id="coming-sub">Names appear here as RSVPs are confirmed.</p>
       </div>
       <div id="coming"></div>
     </section>
@@ -456,14 +474,54 @@ html { scroll-behavior: smooth; }
     });
   }
 
+  /* ---------- Live RSVPs (Google Sheet via Apps Script) ---------- */
+  var remote = { status: "off", people: [], hidden: { yes: 0, maybe: 0, guests: 0 } };
+  var justAdded = "";
+  function endpoint() {
+    if (MODE !== "pages") return "";
+    var u = String(state.settings.rsvpEndpoint || "").trim();
+    return /^https:\/\/script\.google\.com\/macros\/s\/[\w-]+\/exec$/.test(u) ? u : "";
+  }
+  function live() { return !!endpoint(); }
+  function cleanPerson(p) {
+    return { name: String(p && p.name || "").trim().slice(0, 60), status: p && p.status === "maybe" ? "maybe" : "yes", guests: Number(p && p.guests) === 1 ? 1 : 0 };
+  }
+  function applyRemote(d) {
+    if (!d || !Array.isArray(d.people)) { remote.status = "error"; render(); return; }
+    remote.people = d.people.map(cleanPerson).filter(function (p) { return p.name; });
+    var h = d.hidden || {};
+    remote.hidden = { yes: Number(h.yes) || 0, maybe: Number(h.maybe) || 0, guests: Number(h.guests) || 0 };
+    remote.status = "ok"; render();
+  }
+  function loadRemote() {
+    var url = endpoint(); if (!url) { remote.status = "off"; return; }
+    remote.status = "loading"; renderComing();
+    var settled = false;
+    var timer = setTimeout(function () { if (!settled) { remote.status = "slow"; renderComing(); } }, 10000);
+    fetch(url + "?t=" + Date.now()).then(function (r) { return r.json(); }).then(function (d) {
+      settled = true; clearTimeout(timer); applyRemote(d);
+    }).catch(function () { settled = true; clearTimeout(timer); remote.status = "error"; render(); });
+  }
+  function allRsvps() {
+    var seen = {}, out = [];
+    remote.people.concat(state.rsvps).forEach(function (r) {
+      var k = String(r.name).toLowerCase().replace(/\s+/g, " ").trim();
+      if (!k || seen[k]) return; seen[k] = 1; out.push(r);
+    });
+    return out;
+  }
+  function phoneDigits(s) { var d = String(s || "").replace(/\D/g, ""); if (d.charAt(0) === "0") d = "234" + d.slice(1); return d; }
+
   function renderTally() {
     var box = $("tally"); box.textContent = "";
-    var yes = state.rsvps.filter(function (r) { return r.status === "yes"; });
-    var heads = yes.reduce(function (a, r) { return a + 1 + (Number(r.guests) || 0); }, 0);
-    var maybe = state.rsvps.length - yes.length;
+    var everyone = allRsvps();
+    var yes = everyone.filter(function (r) { return r.status === "yes"; });
+    var yesCount = yes.length + remote.hidden.yes;
+    var heads = yes.reduce(function (a, r) { return a + 1 + (Number(r.guests) || 0); }, 0) + remote.hidden.yes + remote.hidden.guests;
+    var maybe = everyone.length - yes.length + remote.hidden.maybe;
     var total = state.contributions.reduce(function (a, c) { return a + (Number(c.amount) || 0); }, 0);
     function item(num, lbl) { return el("div", { class: "tally-item" }, el("span", { class: "tally-num", text: num }), el("span", { class: "tally-lbl", text: lbl })); }
-    box.appendChild(item(String(yes.length), "confirmed" + (maybe ? " · " + maybe + " maybe" : "") + (heads > yes.length ? " · " + heads + " incl. guests" : "")));
+    box.appendChild(item(String(yesCount), "confirmed" + (maybe ? " · " + maybe + " maybe" : "") + (heads > yesCount ? " · " + heads + " incl. guests" : "")));
     box.appendChild(item(String(state.contributions.length), state.contributions.length === 1 ? "contributor" : "contributors"));
     box.appendChild(item(naira(total), "raised so far"));
     var goal = Number(state.settings.goal) || 0;
@@ -484,20 +542,34 @@ html { scroll-behavior: smooth; }
 
   function renderComing() {
     var box = $("coming"); box.textContent = "";
-    if (!state.rsvps.length) {
-      box.appendChild(el("div", { class: "empty" }, el("strong", { text: "No confirmations yet." }), el("span", { text: "Be the first. Fill in the RSVP above and send it to the organisers; names appear here as they're confirmed." })));
+    $("coming-sub").textContent = live() ? "Names appear here as soon as classmates RSVP." : "Names appear here as RSVPs are confirmed.";
+    var everyone = allRsvps();
+    var hiddenTotal = remote.hidden.yes + remote.hidden.maybe;
+    if (!everyone.length && !hiddenTotal) {
+      if (remote.status === "loading") { box.appendChild(el("div", { class: "empty" }, el("strong", { text: "Loading RSVPs\u2026" }))); return; }
+      if (remote.status === "slow" || remote.status === "error") {
+        box.appendChild(el("div", { class: "empty" }, el("strong", { text: "Couldn't load the RSVP list right now." }), el("span", { text: "Check your connection and refresh the page. You can still RSVP above." })));
+        return;
+      }
+      box.appendChild(el("div", { class: "empty" }, el("strong", { text: "No confirmations yet." }),
+        el("span", { text: live() ? "Be the first. Fill in the RSVP above and your name shows up here straight away." : "Be the first. Fill in the RSVP above and send it to the organisers; names appear here as they're confirmed." })));
       return;
     }
-    var row = el("div", { class: "people" });
-    state.rsvps.slice().sort(function (a, b) { return a.name.localeCompare(b.name); }).forEach(function (r) {
-      row.appendChild(el("span", { class: "person" },
-        el("span", { class: "avatar", style: "background:" + colorFor(r.name), text: initials(r.name) || "?" }),
-        el("span", { class: "person-name", text: r.name }),
-        Number(r.guests) ? el("span", { class: "person-meta", text: "+" + r.guests }) : null,
-        r.status === "maybe" ? el("span", { class: "tag-maybe", text: "Maybe" }) : null,
-        removeBtn("rsvps", r.id, r.name)));
-    });
-    box.appendChild(row);
+    if (everyone.length) {
+      var row = el("div", { class: "people" });
+      everyone.slice().sort(function (a, b) { return a.name.localeCompare(b.name); }).forEach(function (r) {
+        var isNew = justAdded && r.name.toLowerCase() === justAdded;
+        row.appendChild(el("span", { class: "person" + (isNew ? " is-new" : "") },
+          el("span", { class: "avatar", style: "background:" + colorFor(r.name), text: initials(r.name) || "?" }),
+          el("span", { class: "person-name", text: r.name }),
+          Number(r.guests) ? el("span", { class: "person-meta", text: "+" + r.guests }) : null,
+          r.status === "maybe" ? el("span", { class: "tag-maybe", text: "Maybe" }) : null,
+          r.id ? removeBtn("rsvps", r.id, r.name) : null));
+      });
+      box.appendChild(row);
+    }
+    if (hiddenTotal) box.appendChild(el("p", { class: "private-note", text: "Plus " + hiddenTotal + (hiddenTotal === 1 ? " classmate who" : " classmates who") + " chose to keep their RSVP private." }));
+    if (remote.status === "slow" || remote.status === "error") box.appendChild(el("p", { class: "private-note", text: "Some RSVPs couldn't be loaded. Refresh to see the full list." }));
   }
 
   function renderThanks() {
@@ -540,7 +612,7 @@ html { scroll-behavior: smooth; }
   }
 
   function render() {
-    renderHero(); renderCountdown(); renderTally(); renderComing(); renderThanks(); renderFind(); renderFooter();
+    renderHero(); renderCountdown(); renderTally(); renderComing(); renderThanks(); renderFind(); renderFooter(); rsvpFormMode();
     if (isOrganiser) renderOrganiser();
     renderSavebar();
   }
@@ -557,17 +629,63 @@ html { scroll-behavior: smooth; }
     box.hidden = false;
   }
 
+  function rsvpFormMode() {
+    var on = live();
+    $("r-phone-field").hidden = !on;
+    $("rsvp-sub").textContent = on
+      ? "Fill this in and you\u2019re on the list straight away. Only the organisers see your WhatsApp number."
+      : "Fill this in and send it to the organisers on WhatsApp. Your name joins the list below once they confirm it.";
+    $("r-submit").textContent = on ? "Confirm my RSVP" : "Prepare my RSVP";
+  }
+
+  function showRsvpSaved(name, hidden) {
+    var box = $("rsvp-out"); box.textContent = "";
+    box.appendChild(el("div", { class: "ok-box" },
+      el("strong", { text: hidden ? "Your RSVP is saved, " + name.split(" ")[0] + "." : "You\u2019re on the list, " + name.split(" ")[0] + "!" }),
+      el("span", { text: hidden ? "Your name is hidden from the public list, but you count in the total." : "Your name now shows under Confirmed classmates." }),
+      el("span", { class: "note", text: "To change your answer or hide or show your name, fill in the form again with the same WhatsApp number." })));
+    box.hidden = false;
+  }
+
   $("rsvp-form").addEventListener("submit", function (e) {
     e.preventDefault();
-    var name = $("r-name").value.trim();
+    var name = $("r-name").value.trim().replace(/\s+/g, " ");
     if (!name) { $("r-name").focus(); toast("Add your name first"); return; }
-    var status = $("r-maybe").checked ? "Maybe" : "Yes";
+    var maybe = $("r-maybe").checked;
     var guests = Math.min(1, Number($("r-guests").value) || 0);
+    var hide = $("r-hide").checked;
+
+    if (live()) {
+      var phone = phoneDigits($("r-phone").value);
+      if (phone.length < 10 || phone.length > 15) { $("r-phone").focus(); toast("Add your WhatsApp number"); return; }
+      var btn = $("r-submit"); btn.disabled = true; btn.textContent = "Saving\u2026";
+      var payload = { name: name, phone: phone, status: maybe ? "maybe" : "yes", guests: guests, hidden: hide, website: $("r-website").value };
+      fetch(endpoint(), { method: "POST", body: JSON.stringify(payload) }).then(function (r) { return r.json(); }).then(function (d) {
+        btn.disabled = false; btn.textContent = "Confirm my RSVP";
+        if (d && d.ok) {
+          justAdded = hide ? "" : name.toLowerCase();
+          applyRemote(d);
+          showRsvpSaved(name, hide);
+          if (!hide) { var c = document.querySelector(".person.is-new"); if (c) setTimeout(function () { c.scrollIntoView({ behavior: "smooth", block: "center" }); }, 600); }
+        } else {
+          var box = $("rsvp-out"); box.textContent = "";
+          box.appendChild(el("div", { class: "err-box", text: (d && d.error) || "Your RSVP couldn't be saved. Please try again." }));
+          box.hidden = false;
+        }
+      }).catch(function () {
+        btn.disabled = false; btn.textContent = "Confirm my RSVP";
+        var box = $("rsvp-out"); box.textContent = "";
+        box.appendChild(el("div", { class: "err-box", text: "Couldn't reach the RSVP list. Check your connection and try again." }));
+        box.hidden = false;
+      });
+      return;
+    }
+
     var msg = "Salam! RSVP for the BUK Computer Science 2021 Reunion (" + shortDate() + ")\n" +
-      "Name: " + name + "\n" + "Attending: " + status + "\n" + "Extra guests: " + guests;
+      "Name: " + name + "\n" + "Attending: " + (maybe ? "Maybe" : "Yes") + "\n" + "Extra guests: " + guests + "\n" + "Hide my RSVP: " + (hide ? "Yes" : "No");
     showOut($("rsvp-out"), msg);
-    if (isOrganiser) {
-      state.rsvps.push({ id: uid(), name: name, status: status.toLowerCase(), guests: guests }); changed();
+    if (isOrganiser && !hide) {
+      state.rsvps.push({ id: uid(), name: name, status: maybe ? "maybe" : "yes", guests: guests }); changed();
       toast("Added to the list (organiser)");
     }
   });
@@ -645,14 +763,19 @@ html { scroll-behavior: smooth; }
       var vn = el("input", { value: state.settings.venue || "", placeholder: "e.g. FCSIT, T.Y. Danjuma Building, New Campus" });
       var gl = el("input", { inputmode: "numeric", value: state.settings.goal ? String(state.settings.goal) : "", placeholder: "Leave empty for no target" });
       var wa = el("input", { inputmode: "tel", value: state.settings.whatsapp || "", placeholder: "e.g. 0803 000 0000" });
+      var ep = el("input", { inputmode: "url", value: state.settings.rsvpEndpoint || "", placeholder: "https://script.google.com/macros/s/\u2026/exec" });
       body = el("form", { onsubmit: function (e) { e.preventDefault();
         state.settings.eventLocal = dt.value || state.settings.eventLocal;
         state.settings.venue = vn.value.trim();
         state.settings.goal = Number(String(gl.value).replace(/[^\d]/g, "")) || 0;
         state.settings.whatsapp = wa.value.trim();
-        changed(); toast("Settings updated"); } },
+        var prevEp = state.settings.rsvpEndpoint || "";
+        state.settings.rsvpEndpoint = ep.value.trim();
+        changed();
+        if (state.settings.rsvpEndpoint !== prevEp) loadRemote(); toast("Settings updated"); } },
         el("div", { class: "row2" }, field("o-s-date", "Date and time (WAT)", dt), field("o-s-venue", "Venue", vn)),
         el("div", { class: "row2" }, field("o-s-goal", "Planning budget (₦)", gl), field("o-s-wa", "Organiser WhatsApp number", wa)),
+        MODE === "pages" ? field("o-s-ep", "Live RSVP sheet (Apps Script web app URL)", ep) : null,
         el("p", { class: "note", text: "The weekday shown on the page is worked out from the date, so it always matches the calendar." }),
         el("div", {}, el("button", { class: "btn btn-blue btn-sm", type: "submit" }, "Apply settings")));
     }
@@ -717,7 +840,8 @@ html { scroll-behavior: smooth; }
     checkHash();
     fetch("data.json?t=" + Date.now(), { cache: "no-store" }).then(function (r) { return r.ok ? r.json() : null; }).then(function (d) {
       if (d && d.settings) { saved = d; state = clone(d); render(); }
-    }).catch(function () {});
+      loadRemote();
+    }).catch(function () { loadRemote(); });
   }
 
   var C = window.claude;
